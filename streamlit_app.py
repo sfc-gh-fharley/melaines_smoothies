@@ -18,7 +18,6 @@ session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
-
 ingredients_list = st.multiselect(
     "Choose up to 5 ingredients:"
     , my_dataframe
@@ -45,3 +44,7 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         
         st.success('Your Smoothie is ordered!', icon="✅")
+
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response)
